@@ -61,6 +61,7 @@ std::unique_ptr<Module> solutionBuildModule(LLVMContext &Ctxt) {
   // Create the types that we will use over and over;
   Type *Int32Ty = Type::getInt32Ty(Ctxt);
   Type *VoidTy = Type::getVoidTy(Ctxt);
+  // Never used
   Type *PtrTy = PointerType::get(Ctxt, /*AddrSpace=*/0);
 
   // Create the high level module.

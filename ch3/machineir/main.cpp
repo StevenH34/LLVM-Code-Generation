@@ -52,8 +52,7 @@ int main() {
     return -1;
   }
   auto *LLVMTM = static_cast<CodeGenTargetMachineImpl *>(
-      TheTarget->createTargetMachine(TT, "", "", TargetOptions(), std::nullopt,
-                                     std::nullopt, CodeGenOptLevel::Default));
+      TheTarget->createTargetMachine(TT, "", "", TargetOptions(), std::nullopt, std::nullopt, CodeGenOptLevel::Default));
   MachineModuleInfoWrapperPass MMIWP(LLVMTM);
   LLVMContext Context;
   Module MyModule("MyModule", Context);
@@ -88,18 +87,15 @@ int main() {
     return -1;
   }
 
-  MachineFunction *Res =
-      solutionPopulateMachineIR(MMIWP.getMMI(), *SolutionFoo, W0, W1);
+  MachineFunction *Res = solutionPopulateMachineIR(MMIWP.getMMI(), *SolutionFoo, W0, W1);
   bool solutionIsCorrect = checkFunctionCorrectness(Res, W0, W1);
 
   Function *Foo = Function::Create(
       FunctionType::get(Type::getVoidTy(Context), /*IsVarArg=*/false),
       Function::ExternalLinkage, "foo", MyModule);
 
-  MachineFunction *YourTurnRes =
-      populateMachineIR(MMIWP.getMMI(), *Foo, W0, W1);
+  MachineFunction *YourTurnRes = populateMachineIR(MMIWP.getMMI(), *Foo, W0, W1);
   bool yourTurnIsCorrect = checkFunctionCorrectness(YourTurnRes, W0, W1);
-
 
   return !(solutionIsCorrect && yourTurnIsCorrect);
 }
