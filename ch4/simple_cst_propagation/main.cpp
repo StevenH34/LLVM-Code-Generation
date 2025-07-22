@@ -15,6 +15,8 @@ extern bool solutionConstantPropagation(llvm::Function &);
 
 bool checkFunctionCorrectness(llvm::Function &Res) {
   Res.print(errs());
+  // Uses LLVM's built-in verifyFunction to ensure that 
+  // the optimization didn't break the code or produce an invalid result.
   // verifyFunction returns true if it finds errors and
   // print them on the provided output stream (errs() here).
   if (verifyFunction(Res, &errs())) {
@@ -66,16 +68,18 @@ const char *InputIR =
     "}\n";
 
 int main(int argc, char **argv) {
-  LLVMContext Context;
+  LLVMContext Context; // Essential for working with LLVM
   SMDiagnostic Err;
-  std::unique_ptr<Module> MyModule;
-  // To be able to play with the optimization a little bit,
-  // support a mode where you can feed your own IR files.
+  // Module is a container for all the LLVM IR code, functions, and global variables.
+  std::unique_ptr<Module> MyModule; // Smart pointer designed to manage an LLVM Module object
+
+
+  // Checking for input IR files.
   if (argc == 2) {
     outs() << "Reading module from '" << argv[1] << "'\n";
-    MyModule = parseIRFile(argv[1], Err, Context);
+    MyModule = parseIRFile(argv[1], Err, Context); // Loads .ll or .bc file
   } else {
-    MyModule = parseAssemblyString(InputIR, Err, Context);
+    MyModule = parseAssemblyString(InputIR, Err, Context); // Loads default InputIR code above
   }
   if (!MyModule) {
     errs() << "Unable to build module\n";

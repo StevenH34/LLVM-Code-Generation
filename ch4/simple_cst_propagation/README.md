@@ -12,7 +12,11 @@ Try to beat the reference implementation by supporting more cases than it does!
 ## Configure your build directory ##
 
 ```bash
-cmake -GNinja -DCMAKE_BUILD_TYPE=Debug -DLLVM_DIR=<path/to/llvm/install>/lib/cmake/llvm -Bbuild .
+cmake -GNinja -DCMAKE_BUILD_TYPE=Debug -DLLVM_DIR=$(brew --prefix llvm)/lib/cmake/llvm -Bbuild .
+
+cmake -GNinja -DCMAKE_BUILD_TYPE=Debug \
+  -DLLVM_DIR=$(brew --prefix llvm)/lib/cmake/llvm \
+  -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -Bbuild .
 ```
 
 This will initialize your build directory in `build` (the `-B` option) with Ninja (`-G` option).
@@ -38,7 +42,7 @@ This should produce in the `build` directory a binary named `simple_cst_propagat
 
 This will run both the reference implementation and your implementation on `input.ll` if specified or the default input if not.
 
-The run will apply both implementions to the input and will check whether an optimization happened, and if the resulting IR is correct.
+The run will apply both implementations to the input and will check whether an optimization happened, and if the resulting IR is correct.
 
 It will also report which implementation managed to optimize the input IR.
 
