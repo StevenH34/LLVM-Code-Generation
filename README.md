@@ -26,40 +26,19 @@
 The LLVM infrastructure is a popular compiler ecosystem widely used in the tech industry and academia. This technology is crucial for both experienced and aspiring compiler developers looking to make an impact in the field. Written by Quentin Colombet, a veteran LLVM contributor and architect of the GlobalISel framework, this book provides a primer on the main aspects of LLVM, with an emphasis on its backend infrastructure; that is, everything needed to transform the intermediate representation (IR) produced by frontends like Clang into assembly code and object files.
 You’ll learn how to write an optimizing code generator for a toy backend in LLVM. The chapters will guide you step by step through building this backend while exploring key concepts, such as the ABI, cost model, and register allocation. You’ll also find out how to express these concepts using LLVM's existing infrastructure and how established backends address these challenges. Furthermore, the book features code snippets that demonstrate the actual APIs.
 By the end of this book, you’ll have gained a deeper understanding of LLVM. The concepts presented are expected to remain stable across different LLVM versions, making this book a reliable quick reference guide for understanding LLVM.</details>
-<details open> 
-  <summary><h2>Key Learnings</summary>
-<ul>
-
-<li>Understand essential compiler concepts, such as SSA, dominance, and ABI</li>
-
-<li>Build and extend LLVM backends for creating custom compiler features</li>
-
-<li>Optimize code by manipulating LLVM's Intermediate Representation</li>
-
-<li>Contribute effectively to LLVM open-source projects and development</li>
-
-<li>Develop debugging skills for LLVM optimizations and passes</li>
-
-<li>Grasp how encoding and (dis)assembling work in the context of compilers</li>
-
-<li>Utilize LLVM's TableGen DSL for creating custom compiler models</li>
-
-</ul>
-
-  </details>
 
 <details open> 
   <summary><h2>Chapters</summary>
-     <img src="https://cliply.co/wp-content/uploads/2020/02/372002150_DOCUMENTS_400px.gif" alt="LLVM Code Generation, First Edition" height="556px" align="right">
+     
 <ol>
 
-  <li>Building LLVM and Understanding the Directory Structure</li>
+  <li> ✅ Building LLVM and Understanding the Directory Structure</li>
 
-  <li>Contributing to LLVM</li>
+  <li> ✅ Contributing to LLVM</li>
 
-  <li>Compiler Basics and How They Map to LLVM APIs</li>
+  <li> ✅ Compiler Basics and How They Map to LLVM APIs</li>
 
-  <li>Writing Your First Optimization</li>
+  <li> ✅ Writing Your First Optimization</li>
 
   <li>Dealing with Pass Managers</li>
 
@@ -98,51 +77,3 @@ By the end of this book, you’ll have gained a deeper understanding of LLVM. Th
 </ol>
 
 </details>
-
-
-<details open> 
-  <summary><h2>Requirements for this book</summary>
-To follow the instructions in this book, you need LLVM 20 installed on your system, running on Windows, macOS, or Linux operating systems.
-
-Navigate in the different `chX` directory and look at the examples provided and do the exercises when applicable.
-Each directory has its own README.md with specific directions.
-
-Note:
-The exercises have been tested with the open source repository of LLVM at the Git hash 424c2d9b7e4d from February 13th 2025. Which is LLVM 20.1.1.
-
-Some of the exercises interact directly with the LLVM C++ API. This API has no stability guarantee therefore it is possible that newer or older version of LLVM will not work with these exercises.
-
-For the exercices that requires a version of LLVM handy, if you build your own make sure to use the `CMAKE_INSTALL_PREFIX` cmake variable to set the install path, then build the `install` target.
-
-Then, you will need to provide this path to CMake in the different exercise.
-
-Follow the READMEs in the different directories when you get there.
-  </details>
-
-<details> 
-  <summary><h2>Get to know the author</h2></summary>
-
-_Quentin Colombet_ is a veteran LLVM contributor specializing in compiler backends. He is the architect of the new instruction selection framework (GlobalISel) and code owner of the LLVM register allocators. With over two decades of experience, he has worked on compiler backends for a variety of architectures, including GPU, CPU, microcontrollers, DSP, and ASICs. Quentin joined Apple in 2012 and has contributed to x86, Aarch64, and Apple GPU backends. He is passionate about helping newcomers onboard the LLVM infrastructure, having mentored interns and new hires over the years.
-</details>
-
-<details> 
-  <summary><h2>Other Related Books</h2></summary>
-<ul>
-
-  <li><a href="https://www.packtpub.com/en-us/product/learn-llvm-17-second-edition/9781837631346">Learn LLVM 17, Second Edition</a></li>
-
-  <li><a href="https://www.packtpub.com/en-us/product/llvm-techniques-tips-and-best-practices-clang-and-middle-end-libraries-first-edition/9781838824952">LLVM Techniques, Tips, and Best Practices Clang and Middle-End Libraries, First Edition</a></li>
-
-  <li><a href="https://www.packtpub.com/en-us/product/build-your-own-programming-language-second-edition/9781804618028">Build Your Own Programming Language, Second Edition</a></li>
-
-  <li><a href="https://www.packtpub.com/en-us/product/c-memory-management-first-edition/9781805129806">C++ Memory Management, First Edition</a></li>
- 
-</ul>
-
-</details>
-
-
-## Errata
-
-* Page 11: In the command `$ git clone https://github.com/llvm/llvm/project.git`, the URL should be `https://github.com/llvm/llvm-project.git`. Therefore, the first line becomes `$ git clone https://github.com/llvm/llvm-project.git`.
-* Page 71: In the descriptipn below Figure 3.4, the sentence "Because of that, inserting a store in A and **reloading in B** means that the whole dotted region needs to play nicely with this memory location." should be "Because of that, inserting a store in A and **reloading in C** means that the whole dotted region needs to play nicely with this memory location."
