@@ -13,17 +13,38 @@ void initializeYourTurnConstantPropagationPass(PassRegistry &);
 };
 
 namespace {
-class YourTurnConstantPropagation /* TODO: Fill in the blanks */ {
+// Inherit from llvm::FunctionPass 
+class YourTurnConstantPropagation : public FunctionPass {
 public:
-  YourTurnConstantPropagation() /* TODO: Fill in the blanks */ {}
-
-  // TODO: Fill in the blanks.
+  static char ID; // Each legacy pass needs an ID
+  // The constructor needs to call FunctionPass() with the ID
+  YourTurnConstantPropagation() : FunctionPass(ID) {}
+  // Override the virtual function from the base class
+  bool runOnFunction(llvm::Function &F) override {
+    // runOnFunction must return a bool
+    // Return true if the function F was modified
+    // Call the optimization, which returns a bool
+    return solutionConstantPropagation(F);
+  }
 };
 } // End anonymous namespace.
 
-// TODO: Remove and add proper implementation
-void llvm::initializeYourTurnConstantPropagationPass(PassRegistry &) {}
+// Need to define ID so it can allocate memory for the ID 
+// so its address can be used as a unique identifier.
+char YourTurnConstantPropagation::ID = 0;
 
 Pass *createYourTurnPassForLegacyPM() {
-  return nullptr; // TODO: Fill in the blanks.
+  // Return a new instance of YourTurnConstantPropagation class
+  return new YourTurnConstantPropagation();
 }
+
+// Add the INITIALIZE_PASS macro
+// INITIALIZE_PASS(passName, argString, name, cfg, analysis)
+// passName is the class name
+// argString is the cmd line string used to invoke your pass
+// name is the description of your pass
+// cfg is a Boolean that tells the pass manager whether your pass only looks at the CFG
+// analysis is a Boolean that tells whether your pass is an analysis
+INITIALIZE_PASS(YourTurnConstantPropagation, "your-turn-const-prop", "Simple constant propagation", false, false);
+
+// Cannot define a function belonging to namespace llvm from within an anonymous namespace.

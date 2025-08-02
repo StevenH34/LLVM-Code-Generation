@@ -14,6 +14,10 @@ For the body of your optimization just call the provided `solutionConstantPropag
 
 ```bash
 cmake -GNinja -DCMAKE_BUILD_TYPE=Debug -DLLVM_DIR=<path/to/llvm/install>/lib/cmake/llvm -Bbuild .
+
+cmake -GNinja -DCMAKE_BUILD_TYPE=Debug \
+  -DLLVM_DIR=$(brew --prefix llvm)/lib/cmake/llvm \
+  -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -Bbuild .
 ```
 
 This will initialize your build directory in `build` (the `-B` option) with Ninja (`-G` option).
@@ -25,6 +29,8 @@ Either build and install your own llvm (with the `install` target from your LLVM
 
 ```bash
 ninja -C build
+./build/your_first_pass 
+./build/your_first_pass > output.txt 2>&1
 ```
 
 This builds the default target in the build directory.
